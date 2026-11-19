@@ -57,9 +57,9 @@ function Constellation({ color, density = 1 }: { color: string; density?: number
       }
       ctx.strokeStyle = color;
       for (let i = 0; i < pts.length; i++) {
-        const a = pts[i];
+        const a = pts[i]!;
         for (let j = i + 1; j < pts.length; j++) {
-          const b = pts[j];
+          const b = pts[j]!;
           const dx = a.x - b.x;
           const dy = a.y - b.y;
           const d = Math.hypot(dx, dy);
@@ -154,7 +154,7 @@ function Orbits() {
 
 export function AnimatedBackground({ variant, color, className, density, dim = 45, thumb }: Props) {
   if (variant.startsWith("wp:")) {
-    const wp = WALLPAPERS.find((w) => `wp:${w.id}` === variant) ?? WALLPAPERS[0];
+    const wp = WALLPAPERS.find((w) => `wp:${w.id}` === variant) ?? WALLPAPERS[0]!;
     return (
       <div aria-hidden className={cn("pointer-events-none overflow-hidden bg-background", className)}>
         <img src={thumb ? wp.thumb : wp.url} alt="" className="absolute inset-0 h-full w-full object-cover" />
@@ -165,7 +165,7 @@ export function AnimatedBackground({ variant, color, className, density, dim = 4
   return (
     <div aria-hidden className={cn("pointer-events-none overflow-hidden bg-background", className)}>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--secondary),transparent_60%)]" />
-      {variant === "constellation" && <Constellation color={color} density={density} />}
+      {variant === "constellation" && <Constellation color={color} density={density ?? 1} />}
       {variant === "aurora" && <Aurora />}
       {variant === "grid" && <Grid />}
       {variant === "orbits" && <Orbits />}

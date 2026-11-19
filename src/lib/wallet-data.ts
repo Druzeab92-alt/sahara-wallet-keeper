@@ -119,7 +119,7 @@ export function validatePasswordChange(
 }
 
 export function formatMoney(amount: number, currencyCode: string) {
-  const c = CURRENCIES.find((x) => x.code === currencyCode) ?? CURRENCIES[0];
+  const c = CURRENCIES.find((x) => x.code === currencyCode) ?? CURRENCIES[0]!;
   const n = new Intl.NumberFormat("ar", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(amount);
   return `${n} ${c.symbol}`;
 }

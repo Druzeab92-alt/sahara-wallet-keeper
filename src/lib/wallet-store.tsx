@@ -31,7 +31,7 @@ const STORAGE_KEY = "ww-wallet-ui-v1";
 
 const initialState: State = {
   profiles: initialProfiles,
-  activeProfileId: initialProfiles[0].id,
+  activeProfileId: initialProfiles[0]!.id,
   primary: "ice",
   background: "constellation",
   wallpaperDim: 45,
@@ -79,7 +79,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   }, [state, hydrated]);
 
   useEffect(() => {
-    const c = PRIMARY_COLORS.find((p) => p.key === state.primary) ?? PRIMARY_COLORS[0];
+    const c = PRIMARY_COLORS.find((p) => p.key === state.primary) ?? PRIMARY_COLORS[0]!;
     const root = document.documentElement;
     root.style.setProperty("--primary", c.value);
     root.style.setProperty("--primary-glow", c.glow);
@@ -88,7 +88,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const patch = useCallback((fn: (s: State) => Partial<State>) => setState((s) => ({ ...s, ...fn(s) })), []);
 
   const value = useMemo<Ctx>(() => {
-    const activeProfile = state.profiles.find((p) => p.id === state.activeProfileId) ?? state.profiles[0];
+    const activeProfile = state.profiles.find((p) => p.id === state.activeProfileId) ?? state.profiles[0]!;
     const today = new Intl.DateTimeFormat("ar", { day: "numeric", month: "long", year: "numeric" }).format(new Date());
     return {
       ...state,

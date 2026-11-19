@@ -34,7 +34,7 @@ function SelectedMark() {
 
 function AppearancePage() {
   const { primary, setPrimary, background, setBackground, wallpaperDim, setWallpaperDim } = useWallet();
-  const color = (PRIMARY_COLORS.find((c) => c.key === primary) ?? PRIMARY_COLORS[0]).value;
+  const color = (PRIMARY_COLORS.find((c) => c.key === primary) ?? PRIMARY_COLORS[0]!).value;
   const isWallpaper = background.startsWith("wp:");
 
   return (
@@ -113,7 +113,7 @@ function AppearancePage() {
                   <span>تعتيم الخلفية</span>
                   <span className="font-mono">{wallpaperDim}%</span>
                 </div>
-                <Slider dir="rtl" min={0} max={85} step={5} value={[wallpaperDim]} onValueChange={(v) => setWallpaperDim(v[0])} />
+                <Slider dir="rtl" min={0} max={85} step={5} value={[wallpaperDim]} onValueChange={(v) => setWallpaperDim(v[0] ?? 0)} />
               </div>
             )}
           </div>

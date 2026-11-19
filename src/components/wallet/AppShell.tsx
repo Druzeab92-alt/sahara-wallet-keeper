@@ -8,7 +8,7 @@ import { TopBar } from "./TopBar";
 
 function Frame({ children }: { children: ReactNode }) {
   const { background, primary, wallpaperDim } = useWallet();
-  const color = (PRIMARY_COLORS.find((c) => c.key === primary) ?? PRIMARY_COLORS[0]).value;
+  const color = (PRIMARY_COLORS.find((c) => c.key === primary) ?? PRIMARY_COLORS[0]!).value;
   return (
     <div className="relative min-h-screen">
       <AnimatedBackground variant={background} color={color} dim={wallpaperDim} className="fixed inset-0 -z-10" />
